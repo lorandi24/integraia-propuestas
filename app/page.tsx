@@ -26,13 +26,17 @@ export default function Home() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-cyan-electric/15 blur-[120px]" />
 
       <header className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-6 sm:px-6">
-        <Logo className="h-10" />
+        <Logo className="h-10" priority />
         <Link href="/nueva?nueva=1" className="btn-ghost hidden sm:inline-flex">
           Nueva propuesta
         </Link>
       </header>
 
-      <section className="relative mx-auto max-w-4xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pt-20">
+      <section className="relative mx-auto max-w-4xl px-4 pb-16 pt-6 text-center sm:px-6 sm:pt-10">
+        <div className="relative mx-auto mb-8 w-fit">
+          <div className="absolute inset-0 -z-10 rounded-full bg-cyan-electric/10 blur-3xl" />
+          <Logo kind="full" priority className="h-36 sm:h-48" />
+        </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-cyan-electric/30 bg-cyan-electric/10 px-3 py-1 text-xs font-medium text-cyan-electric">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-electric" />
           Herramienta para consultores IntegraIA

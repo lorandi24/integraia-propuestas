@@ -40,7 +40,13 @@ npm run build && npm start
 
 ## Logo
 
-Copia tu archivo a `public/logo-integraia.png`. Si no existe, la app muestra automáticamente un isotipo SVG de marcador de posición (sin imágenes rotas).
+| Archivo | Uso |
+|---|---|
+| `public/logo-integraia.png` | Logotipo completo (lobo + “IntegraIA”), fondo transparente. Hero del inicio y cierre de la propuesta. |
+| `public/logo-integraia-mark.png` | Isotipo del lobo. Encabezados (junto al logotipo tipográfico) y marca de agua de la portada. |
+| `app/icon.png` | Favicon generado a partir del isotipo. |
+
+Para cambiar el logo, reemplaza esos archivos conservando los nombres; `next/image` los sirve en WebP/AVIF y al tamaño necesario.
 
 ## Personalización rápida
 

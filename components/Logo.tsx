@@ -1,66 +1,61 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import mark from "@/public/logo-integraia-mark.png";
+import full from "@/public/logo-integraia.png";
 
 /**
- * Muestra /public/logo-integraia.png. Si el archivo no existe, cae a un
- * isotipo SVG de marcador de posición (reemplázalo subiendo tu PNG).
+ * Logo de IntegraIA by EMET.
+ * - kind="lockup" (por defecto): isotipo del lobo + logotipo tipográfico. Legible en tamaños pequeños.
+ * - kind="full": logotipo original completo (lobo + "IntegraIA").
+ * Los PNG son transparentes, por lo que funcionan sobre fondos claros y oscuros.
+ * next/image sirve WebP/AVIF redimensionado automáticamente.
  */
 export default function Logo({
   className = "h-10",
   variant = "dark",
-  showText = true,
+  kind = "lockup",
+  priority = false,
 }: {
   className?: string;
   variant?: "dark" | "light";
-  showText?: boolean;
+  kind?: "lockup" | "full";
+  priority?: boolean;
 }) {
-  const [failed, setFailed] = useState(false);
-  const ref = useRef<HTMLImageElement>(null);
-
-  // El error puede ocurrir antes de la hidratación: lo verificamos al montar.
-  useEffect(() => {
-    const img = ref.current;
-    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
-  }, []);
-  const textColor = variant === "dark" ? "text-white" : "text-navy-900";
-
-  if (!failed) {
+  if (kind === "full") {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        ref={ref}
-        src="/logo-integraia.png"
+      <Image
+        src={full}
         alt="IntegraIA by EMET"
+        priority={priority}
+        sizes="320px"
         className={`${className} w-auto object-contain`}
-        onError={() => setFailed(true)}
       />
     );
   }
 
+  const dark = variant === "dark";
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`} title="Placeholder: sube /public/logo-integraia.png">
-      <svg viewBox="0 0 48 48" className="h-full w-auto" aria-hidden="true">
-        <defs>
-          <linearGradient id="lg-iia" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#00E5FF" />
-            <stop offset="1" stopColor="#0FB5AE" />
-          </linearGradient>
-        </defs>
-        <rect x="1" y="1" width="46" height="46" rx="12" fill="#060d1f" stroke="url(#lg-iia)" strokeWidth="2" />
-        <path d="M16 13v22M24 13v22" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-        <path d="M24 24h8m0 0v-8m0 8v8" stroke="url(#lg-iia)" strokeWidth="2.5" strokeLinecap="round" />
-        <circle cx="32" cy="16" r="2.5" fill="#00E5FF" />
-        <circle cx="32" cy="32" r="2.5" fill="#0FB5AE" />
-      </svg>
-      {showText && (
-        <span className={`leading-none ${textColor}`}>
-          <span className="block font-display text-[1.05em] font-bold tracking-tight">
-            Integra<span className="text-cyan-electric">IA</span>
-          </span>
-          <span className="block text-[0.55em] font-medium uppercase tracking-[0.2em] opacity-70">by EMET</span>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <Image
+        src={mark}
+        alt=""
+        aria-hidden
+        priority={priority}
+        sizes="96px"
+        className="h-full w-auto object-contain"
+      />
+      <span className="leading-none">
+        <span className="block font-serif text-[1.15em] font-semibold tracking-tight">
+          <span className={dark ? "text-[#E6D8C3]" : "text-[#8A7660]"}>Integra</span>
+          <span className={dark ? "text-cyan-electric" : "text-[#3F5F9A]"}>IA</span>
         </span>
-      )}
+        <span
+          className={`mt-0.5 block text-[0.5em] font-medium uppercase tracking-[0.28em] ${
+            dark ? "text-slate-400" : "text-slate-500"
+          }`}
+        >
+          by EMET
+        </span>
+      </span>
     </span>
   );
 }

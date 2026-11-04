@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Logo from "@/components/Logo";
+import mark from "@/public/logo-integraia-mark.png";
 import { prettyPhone } from "@/lib/format";
 import type { Proposal } from "@/lib/proposal";
 
@@ -44,8 +46,11 @@ export default function ProposalDocument({ p }: { p: Proposal }) {
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-cyan-electric/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-teal-brand/20 blur-3xl" />
 
+        <Image src={mark} alt="" aria-hidden sizes="400px" priority
+          className="pointer-events-none absolute -right-16 top-1/4 h-[55%] w-auto opacity-[0.07] sm:-right-10 sm:opacity-[0.12]" />
+
         <div className="relative flex items-start justify-between gap-4">
-          <Logo className="h-12 sm:h-14" />
+          <Logo className="h-12 sm:h-14" priority />
           <div className="text-right text-xs text-slate-300">
             <p className="font-semibold text-cyan-electric">Folio</p>
             <p className="font-mono">{d.folio}</p>
@@ -93,7 +98,7 @@ export default function ProposalDocument({ p }: { p: Proposal }) {
       {/* ---------- CONTENIDO ---------- */}
       <article className="doc-page px-6 py-10 sm:px-14 sm:py-14">
         <div className="mb-10 flex items-center justify-between border-b border-slate-200 pb-4 print:mb-8">
-          <Logo className="h-8" variant="light" />
+          <Logo className="h-8" variant="light" priority />
           <p className="text-right text-xs text-slate-500">
             {d.businessName} · <span className="font-mono">{d.folio}</span>
           </p>
@@ -249,7 +254,10 @@ export default function ProposalDocument({ p }: { p: Proposal }) {
           </div>
         </Section>
 
-        <div className="mt-12 grid gap-8 border-t border-slate-200 pt-8 text-sm sm:grid-cols-2">
+        <div className="avoid-break mt-12 flex justify-center">
+          <Logo kind="full" className="h-24" priority />
+        </div>
+        <div className="avoid-break mt-8 grid gap-8 border-t border-slate-200 pt-8 text-sm sm:grid-cols-2">
           <div>
             <div className="h-12 border-b border-slate-300" />
             <p className="mt-2 font-medium text-navy-900">{d.consultant}</p>
