@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: dark; }
+  ::selection { background: rgba(0, 229, 255, 0.3); }
+}
+
+@layer components {
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-slate-200;
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-navy-900/80 px-4 py-3 text-[15px] text-white
+      placeholder:text-slate-500 outline-none transition
+      focus:border-cyan-electric/60 focus:ring-2 focus:ring-cyan-electric/20;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition
+      disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2
+      focus-visible:ring-cyan-electric/60;
+  }
+  .btn-primary {
+    @apply btn bg-brand-gradient text-navy-950 shadow-glow hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/5 text-white hover:bg-white/10;
+  }
+  .btn-wa {
+    @apply btn bg-[#25D366] text-navy-950 hover:brightness-105;
+  }
+
+  /* ---------- Documento de propuesta ---------- */
+  .doc-page {
+    @apply relative mx-auto w-full max-w-[210mm] bg-white text-slate-800 shadow-2xl;
+  }
+  .doc-h2 {
+    @apply mb-4 flex items-center gap-3 font-display text-xl font-bold text-navy-900 sm:text-2xl;
+  }
+  .doc-num {
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-900 text-sm font-bold text-cyan-electric;
+  }
+  .doc-p {
+    @apply mb-3 text-[15px] leading-relaxed text-slate-700;
+  }
+}
+
+/* ---------- Impresión / PDF ---------- */
+@page { size: A4; margin: 16mm 14mm; }
+@page :first { margin: 0; }
+
+@media print {
+  :root, html, body { background: #fff !important; color-scheme: light !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .no-print { display: none !important; }
+  .print-area { padding: 0 !important; margin: 0 !important; background: #fff !important; }
+  .doc-page {
+    max-width: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    break-after: page;
+  }
+  .doc-page:last-child { break-after: auto; }
+  .doc-cover { width: 210mm; height: 297mm; padding: 18mm 16mm !important; overflow: hidden; }
+  .doc-section { break-inside: auto; }
+  .doc-h2 { break-after: avoid; }
+  .avoid-break { break-inside: avoid; }
+}
+
+/* Barra de acciones compacta en móvil */
+@media (max-width: 639px) {
+  .toolbar .btn-ghost,
+  .toolbar .btn-wa { padding: 0.5rem 0.75rem; font-size: 0.75rem; border-radius: 0.6rem; }
+}
